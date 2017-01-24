@@ -1,0 +1,14 @@
+version: "2.0"
+services:
+  hospitalrun:
+    build: .
+    ports:
+      - "8090:8080"
+    links:
+      - couchdb
+    depends_on:
+      - couchdb
+  couchdb:
+    image: klaemo/couchdb:latest
+    ports:
+    - "5985:5984"
