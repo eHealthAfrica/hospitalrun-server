@@ -17,6 +17,7 @@ COPY . /usr/src/app
 
 #Setup the DB with initial user
 RUN chmod +x conf/initcouch.sh
+COPY config-example.js config.js
 
 EXPOSE 8080
 
