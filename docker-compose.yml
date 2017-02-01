@@ -1,14 +1,28 @@
 version: "2.0"
 services:
   hospitalrun:
+    container_name: hospitalrun
     build: .
     ports:
       - "8090:8080"
     links:
       - couchdb
+      - elasticsearch
     depends_on:
       - couchdb
+      - elasticsearch
+    container_name: hospitalrun
   couchdb:
+    container_name: couchdb_hr
     image: klaemo/couchdb:latest
+    volumes:
+    - ./data/couchdb:/opt/couchdb/data
     ports:
     - "5985:5984"
+  elasticsearch:
+    container_name: elasticsearch_hr
+    build: ./elasticsearch/
+    volumes:
+    - ./data/elasticsearch:/usr/share/elasticsearch/data
+    ports:
+    - "9201:9200"

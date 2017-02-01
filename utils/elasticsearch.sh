@@ -5,7 +5,7 @@ if [ -z "${1}" ] || [ -z "${2}" ]; then
 fi
 
 echo "Setting up mappings"
-curl -XPUT 'localhost:9200/hrdb' -d' {
+curl -XPUT 'elasticsearch:9200/hrdb' -d' {
     "mappings": {
         "_default_": {        
             "date_detection": false,
@@ -48,7 +48,7 @@ curl -XPUT 'localhost:9200/hrdb' -d' {
     }
  }'
 echo "Setting up couchdb river" 
-curl -XPUT 'localhost:9200/_river/hrdb/_meta' -d "{
+curl -XPUT 'elasticsearch:9200/_river/hrdb/_meta' -d "{
     \"type\" : \"couchdb\",
     \"couchdb\" : {
         \"host\" : \"localhost\",

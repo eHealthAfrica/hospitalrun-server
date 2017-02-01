@@ -16,10 +16,8 @@ RUN npm install --loglevel silent
 COPY . /usr/src/app
 
 #Setup the DB with initial user
-RUN chmod +x conf/initcouch.sh conf/wait.sh
-RUN ./conf/initcouch.sh
+RUN chmod +x conf/initcouch.sh
 
 EXPOSE 8080
 
 CMD ["npm", "start"]
-CMD ["./conf/initcouch.sh"]
