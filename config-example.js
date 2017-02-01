@@ -1,10 +1,10 @@
 var config = {
-  couchDbServer: 'localhost',
+  couchDbServer: 'couchdb',
   couchDbPort: '5984',
   couchDbUseSsl: false,
   couchDbChangesSince: 'now',
-  couchAdminUser: 'COUCH ADMIN USER GOES HERE',
-  couchAdminPassword: 'COUCH ADMIN PASSWORD GOES HERE',
+  couchAdminUser: 'couchadmin',
+  couchAdminPassword: 'test',
   googleClientId: 'FOR GOOGLE SSO; GOOGLE CLIENT ID GOES HERE',
   googleClientSecret: 'FOR GOOGLE SSO; GOOGLE CLIENT SECRET GOES HERE',
   serverPort: '8080',
