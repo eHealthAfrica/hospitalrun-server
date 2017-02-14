@@ -19,7 +19,7 @@
       "name": "hospitalrun-server",
       "image": "387526361725.dkr.ecr.eu-west-1.amazonaws.com/hospitalrun:latest",
       "essential": true,
-      "memory": 1000,
+      "memory": 300,
       "hostname": "hospitalrun",
       "command": [ "npm", "start" ],
       "logConfiguration": {
@@ -55,7 +55,7 @@
        "name": "couchdb",
        "image": "klaemo/couchdb:latest",
        "essential": true,
-       "memory": 1000,
+       "memory": 500,
        "logConfiguration": {
          "logDriver": "awslogs",
          "options": {
@@ -82,7 +82,7 @@
        "name": "elasticsearch",
        "image": "387526361725.dkr.ecr.eu-west-1.amazonaws.com/hospitalrun_elasticsearch:latest",
        "essential": true,
-       "memory": 1500,
+       "memory": 500,
        "logConfiguration": {
          "logDriver": "awslogs",
          "options": {
