@@ -55,7 +55,7 @@
        "name": "couchdb",
        "image": "klaemo/couchdb:latest",
        "essential": true,
-       "memory": 1000
+       "memory": 1000,
        "logConfiguration": {
          "logDriver": "awslogs",
          "options": {
