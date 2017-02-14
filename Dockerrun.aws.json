@@ -1,8 +1,112 @@
 {
-  "AWSEBDockerrunVersion": "1",
-  "Ports": [
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
     {
-      "ContainerPort": "8080"
-    }
+       "name": "elasticsearch-data",
+       "host": {
+         "sourcePath": "/usr/share/elasticsearch/data"
+       }
+     },
+     {
+       "name": "couchdb-data",
+       "host": {
+         "sourcePath": "/opt/couchdb/data"
+       }
+     }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "hospitalrun-server",
+      "image": "387526361725.dkr.ecr.eu-west-1.amazonaws.com/hospitalrun:latest",
+      "essential": true,
+      "memory": 1000,
+      "hostname": "hospitalrun",
+      "command": [ "npm", "start" ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "${DEPLOY_ENV}",
+          "awslogs-region": "${AWS_REGION}",
+          "awslogs-stream-prefix": "${PROJECT_NAME}"
+        }
+      },
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        },
+        {
+          "hostPort": 8443,
+          "containerPort": 443
+        }
+      ],
+      "environment": [
+        {
+          "name": "DEBUG",
+          "value": "False"
+        }
+      ],
+      "links": [
+         "couchdb",
+         "elasticsearch"
+      ]
+     },
+     {
+       "name": "couchdb",
+       "image": "klaemo/couchdb:latest",
+       "essential": true,
+       "logConfiguration": {
+         "logDriver": "awslogs",
+         "options": {
+           "awslogs-group": "${DEPLOY_ENV}",
+           "awslogs-region": "${AWS_REGION}",
+           "awslogs-stream-prefix": "${PROJECT_NAME}"
+         }
+       },
+       "portMappings": [
+         {
+           "hostPort": 5985,
+           "containerPort": 5984
+         }
+       ],
+       "mountPoints": [
+       {
+         "sourceVolume": "couchdb-data",
+         "containerPath": "/opt/couchdb/data",
+         "readOnly": false
+       }
+       ]
+     },
+     {
+       "name": "elasticsearch",
+       "image": "387526361725.dkr.ecr.eu-west-1.amazonaws.com/hospitalrun_elasticsearch:latest",
+       "essential": true,
+       "memory": 1500,
+       "logConfiguration": {
+         "logDriver": "awslogs",
+         "options": {
+           "awslogs-group": "${DEPLOY_ENV}",
+           "awslogs-region": "${AWS_REGION}",
+           "awslogs-stream-prefix": "${PROJECT_NAME}"
+         }
+       },
+      "environment": [
+        {
+          "name": "ES_JAVA_OPTS",
+          "value": "-Xms900m -Xmx900m"
+        }
+       ],
+       "mountPoints": [{
+         "sourceVolume": "elasticsearch-data",
+         "containerPath": "/usr/share/elasticsearch/data",
+         "readOnly": false
+       }],
+       "portMappings": [
+         {
+           "hostPort": 9201,
+           "containerPort": 9200
+         }
+       ]
+     }
   ]
 }
