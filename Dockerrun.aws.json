@@ -25,9 +25,9 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "${DEPLOY_ENV}",
-          "awslogs-region": "${AWS_REGION}",
-          "awslogs-stream-prefix": "${PROJECT_NAME}"
+          "awslogs-group": "hospitalrun-dev",
+          "awslogs-region": "eu-west-1",
+          "awslogs-stream-prefix": "hospitalrun"
         }
       },
       "portMappings": [
@@ -58,11 +58,11 @@
        "memory": 500,
        "logConfiguration": {
          "logDriver": "awslogs",
-         "options": {
-           "awslogs-group": "${DEPLOY_ENV}",
-           "awslogs-region": "${AWS_REGION}",
-           "awslogs-stream-prefix": "${PROJECT_NAME}"
-         }
+        "options": {
+          "awslogs-group": "hospitalrun-dev",
+          "awslogs-region": "eu-west-1",
+          "awslogs-stream-prefix": "hospitalrun"
+        }
        },
        "portMappings": [
          {
@@ -86,10 +86,10 @@
        "logConfiguration": {
          "logDriver": "awslogs",
          "options": {
-           "awslogs-group": "${DEPLOY_ENV}",
-           "awslogs-region": "${AWS_REGION}",
-           "awslogs-stream-prefix": "${PROJECT_NAME}"
-         }
+          "awslogs-group": "hospitalrun-dev",
+          "awslogs-region": "eu-west-1",
+          "awslogs-stream-prefix": "hospitalrun"
+        }
        },
       "environment": [
         {
