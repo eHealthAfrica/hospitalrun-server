@@ -49,7 +49,7 @@
      },
      {
        "name": "couchdb",
-       "image": "klaemo/couchdb:latest",
+       "image": "couchdb:1.6",
        "essential": true,
        "memory": 500,
        "logConfiguration": {

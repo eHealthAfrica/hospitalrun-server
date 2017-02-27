@@ -7,7 +7,7 @@ var config = {
   couchAdminPassword: 'test',
   googleClientId: 'FOR GOOGLE SSO; GOOGLE CLIENT ID GOES HERE',
   googleClientSecret: 'FOR GOOGLE SSO; GOOGLE CLIENT SECRET GOES HERE',
-  serverPort: '8080',
+  serverPort: '3000',
   server: 'localhost',
   sslCert: 'file location of ssl cert if needed',
   sslKey: 'file location of ssl key if needed',
@@ -39,7 +39,7 @@ if (config.serverPort) {
 
 config.couchDbURL = config.getProtocol(config.couchDbUseSsl) + config.couchDbServer + ':' + config.couchDbPort;
 config.couchAuthDbURL = config.getProtocol(config.couchDbUseSsl) + config.couchCredentials() + config.couchDbServer + ':' + config.couchDbPort;
-config.searchURL = 'http://localhost:9200'; // ELASTIC SEARCH URL
+config.searchURL = 'http://elasticsearch:9200'; // ELASTIC SEARCH URL
 config.webDir = __dirname + '/public';
 config.serverInfo = 'Server Information to display to users when viewing about HospitalRun';
 module.exports = config;

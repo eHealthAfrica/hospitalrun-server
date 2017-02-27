@@ -1,5 +1,5 @@
 FROM node:4.4.3-slim
-MAINTAINER Mofesola Babalola <mofesola.babalola@ehealthnigeria.org>
+LABEL maintainer Mofesola Babalola <mofesola.babalola@ehealthnigeria.org>
 
 #Get required applications
 ENV DEBIAN_FRONTEND noninteractive
@@ -11,7 +11,7 @@ WORKDIR /usr/src/app
 
 #Install Dependencies
 COPY package.json /usr/src/app
-RUN npm install --loglevel silent
+RUN npm install --loglevel silent || :
 
 COPY . /usr/src/app
 
@@ -19,6 +19,6 @@ COPY . /usr/src/app
 RUN chmod +x conf/initcouch.sh
 COPY config-example.js config.js
 
-EXPOSE 8080
+EXPOSE 3000
 
 CMD ["npm", "start"]
