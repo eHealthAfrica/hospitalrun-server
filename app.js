@@ -6,7 +6,7 @@ var https = require('https');
 var http = require('http');
 var morgan = require('morgan');
 var serverRoutes = require('hospitalrun-server-routes');
-var setupAppDir = require('hospitalrun');
+var setupAppDir = require('@ehealth-ci/hospitalrun');
 var server;
 
 dbListeners(config);
