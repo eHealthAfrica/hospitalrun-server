@@ -1,0 +1,17 @@
+branch-defaults:
+  docker:
+    environment: hospitalrun-dev
+  master:
+    environment: null
+    group_suffix: null
+environment-defaults:
+  hospitalrun-dev:
+    branch: null
+    repository: null
+global:
+  application_name: hospitalrun
+  default_ec2_keyname: aws-deploy
+  default_platform: Multi-container Docker 1.12.6 (Generic)
+  default_region: eu-west-1
+  profile: null
+  sc: git
