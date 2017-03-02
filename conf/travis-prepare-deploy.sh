@@ -33,5 +33,7 @@ docker-compose build
 docker tag "${PROJECT_NAME}:latest" "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"
 docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"
 
-envsubst < travis-deploy.sh.tmpl > ../travis-deploy.sh
-chmod +x ../travis-deploy.sh
+ls
+
+envsubst < conf/travis-deploy.sh.tmpl > travis-deploy.sh
+chmod +x travis-deploy.sh
