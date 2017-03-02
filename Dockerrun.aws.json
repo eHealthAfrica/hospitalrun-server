@@ -57,7 +57,7 @@
         "options": {
           "awslogs-group": "hospitalrun-dev",
           "awslogs-region": "eu-west-1",
-          "awslogs-stream-prefix": "hospitalrun"
+          "awslogs-stream-prefix": "hospitalrun-app"
         }
        },
        "portMappings": [
@@ -84,7 +84,7 @@
          "options": {
           "awslogs-group": "hospitalrun-dev",
           "awslogs-region": "eu-west-1",
-          "awslogs-stream-prefix": "hospitalrun"
+          "awslogs-stream-prefix": "hospitalrun-es"
         }
        },
       "environment": [

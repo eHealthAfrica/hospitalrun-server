@@ -3,26 +3,39 @@ services:
   hospitalrun:
     container_name: hospitalrun
     build: .
+    image: hospitalrun
     ports:
       - "8090:3000"
     links:
       - couchdb
       - elasticsearch
+      - logstash
     depends_on:
       - couchdb
       - elasticsearch
+      - logstash
     container_name: hospitalrun
+
   couchdb:
     container_name: couchdb_hr
     image: couchdb:1.6
     volumes:
-    - ./data/couchdb:/opt/couchdb/data
+      - ./data/couchdb:/opt/couchdb/data
     ports:
-    - "5985:5984"
+      - "5985:5984"
+
   elasticsearch:
     container_name: elasticsearch_hr
     build: ./elasticsearch/
+    image: elasticsearch_hr
     volumes:
-    - ./data/elasticsearch:/usr/share/elasticsearch/data
+      - ./data/elasticsearch:/usr/share/elasticsearch/data
     ports:
-    - "9201:9200"
+      - "9201:9200"
+
+  logstash:
+    container_name: logstash_hr
+    image: docker.elastic.co/logstash/logstash:5.2.2
+    volumes:
+      - ./data/logstash/pipeline/:/usr/share/logstash/pipeline/
+      - ./data/logstash/settings/:/usr/share/logstash/config/
