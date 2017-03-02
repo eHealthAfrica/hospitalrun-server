@@ -33,25 +33,25 @@ after_success:
 
 deploy:
   - provider: script
-    script: ./conf/travis-deploy.sh
+    script: ./travis-deploy.sh
     skip_cleanup: true
     on:
       branch: dev
 
   - provider: script
-    script: ./conf/travis-deploy.sh
+    script: ./travis-deploy.sh
     skip_cleanup: true
     on:
       branch: conf/docker
 
   - provider: script
-    script: ./conf/travis-deploy.sh
+    script: ./travis-deploy.sh
     skip_cleanup: true
     on:
       branch: stage
 
   - provider: script
-    script: ./conf/master-deploy.sh
+    script: ./master-deploy.sh
     skip_cleanup: true
     on:
       branch: master
