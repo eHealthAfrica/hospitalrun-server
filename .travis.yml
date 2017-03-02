@@ -1,50 +1,48 @@
-  language: node_js
-  node_js:
-  - "4"
-  sudo: required
-  services:
-  - docker
-  env:
-    global:
-      - DOCKER_IMAGE_REPO: 387526361725.dkr.ecr.eu-west-1.amazonaws.com
-      - PROJECT_NAME: hospitalrun
-      - AWS_REGION: eu-west-1
+language: node_js
+sudo: required
+services:
+- docker
+env:
+  global:
+    DOCKER_IMAGE_REPO: 387526361725.dkr.ecr.eu-west-1.amazonaws.com
+    PROJECT_NAME: hospitalrun
+    AWS_REGION: eu-west-1
 
-  before_install:
-    - sudo apt-get update
-    - sudo apt-get install python-pip
-    - mkdir -p ~/.aws
-    - openssl aes-256-cbc -K $encrypted_bf850a6c18c6_key -iv $encrypted_bf850a6c18c6_iv -in conf/credentials.enc -out ~/.aws/credentials -d
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install python-pip
+  - mkdir -p ~/.aws
+  - openssl aes-256-cbc -K $encrypted_bf850a6c18c6_key -iv $encrypted_bf850a6c18c6_iv -in conf/credentials.enc -out ~/.aws/credentials -d
 
-  cache:
-    directories:
-    - "$HOME/.cache"
-    - "$hOME/.npm"
+cache:
+  directories:
+  - "$HOME/.cache"
+  - "$hOME/.npm"
 
-  install:
-    - pip install -r conf/pip-deploy.txt
+install:
+  - pip install -r conf/pip-deploy.txt
 
-  script:
-    - echo "No test scripts! Developers should create test scripts to be run here"
+script:
+  - echo "No test scripts! Developers should create test scripts to be run here"
 
-  after_success:
-    - ./travis-prepare-deploy.sh
+after_success:
+  - ./travis-prepare-deploy.sh
 
-  deploy:
-    - provider: script
-      script: ./conf/travis-deploy.sh
-      skip_cleanup: true
-      on:
-        branch: dev
+deploy:
+  - provider: script
+    script: ./conf/travis-deploy.sh
+    skip_cleanup: true
+    on:
+      branch: dev
 
-    - provider: script
-      script: ./conf/travis-deploy.sh
-      skip_cleanup: true
-      on:
-        branch: stage
+  - provider: script
+    script: ./conf/travis-deploy.sh
+    skip_cleanup: true
+    on:
+      branch: stage
 
-    - provider: script
-      script: ./conf/master-deploy.sh
-      skip_cleanup: true
-      on:
-        branch: master
+  - provider: script
+    script: ./conf/master-deploy.sh
+    skip_cleanup: true
+    on:
+      branch: master
