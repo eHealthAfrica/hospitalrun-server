@@ -14,6 +14,7 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install python-pip
   - mkdir -p ~/.aws
+  - chmod +x conf/*.sh
   - openssl aes-256-cbc -K $encrypted_bf850a6c18c6_key -iv $encrypted_bf850a6c18c6_iv -in conf/credentials.enc -out ~/.aws/credentials -d
 
 cache:
@@ -28,7 +29,7 @@ script:
   - echo "No test scripts! Developers should create test scripts to be run here"
 
 after_success:
-  - ./travis-prepare-deploy.sh
+  - ./conf/travis-prepare-deploy.sh
 
 deploy:
   - provider: script
