@@ -1,7 +1,9 @@
 language: node_js
+node_js:
+  - '4'
 sudo: required
 services:
-- docker
+  - docker
 env:
   global:
     DOCKER_IMAGE_REPO: 387526361725.dkr.ecr.eu-west-1.amazonaws.com
@@ -34,6 +36,12 @@ deploy:
     skip_cleanup: true
     on:
       branch: dev
+
+   - provider: script
+    script: ./conf/travis-deploy.sh
+    skip_cleanup: true
+    on:
+      branch: conf/docker
 
   - provider: script
     script: ./conf/travis-deploy.sh

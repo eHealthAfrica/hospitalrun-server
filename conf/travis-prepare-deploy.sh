@@ -20,6 +20,8 @@ export TAG
 if [[ "${PR}" == "false" ]]; then
     if [[ "${BRANCH}" == "dev" ]]; then
         export DEPLOY_ENV="hospitalrun-dev"
+    elif [[ "${BRANCH}" == "conf/docker" ]]; then
+        export DEPLOY_ENV="hospitalrun-dev"
     elif [[ "${BRANCH}" == "stage" ]]; then
         export DEPLOY_ENV="hospitalrun-stage"
     fi
