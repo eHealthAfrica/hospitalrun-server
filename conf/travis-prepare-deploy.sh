@@ -21,8 +21,6 @@ export TAG=$TAG
 if [[ "${PR}" == "false" ]]; then
     if [[ "${BRANCH}" == "dev" ]]; then
         export DEPLOY_ENV="hospitalrun-dev"
-    elif [[ "${BRANCH}" == "conf/docker" ]]; then
-        export DEPLOY_ENV="hospitalrun-dev"
     elif [[ "${BRANCH}" == "stage" ]]; then
         export DEPLOY_ENV="hospitalrun-stage"
     fi
@@ -33,6 +31,10 @@ $(aws ecr get-login --region="${AWS_REGION}")
 docker-compose build
 docker tag "${PROJECT_NAME}:latest" "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"
 docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"
+
+# Push Logstash
+docker tag "${PROJECT_NAME}_logstash:latest" "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_logstash:${TAG}"
+docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_logstash:${TAG}"
 
 envsubst < conf/travis-deploy.sh.tmpl > travis-deploy.sh && envsubst < conf/Dockerrun.aws.json.tmpl > Dockerrun.aws.json
 

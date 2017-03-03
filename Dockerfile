@@ -16,11 +16,9 @@ RUN npm install --loglevel silent
 COPY . /usr/src/app
 
 #Setup the DB with initial user
-RUN chmod +x conf/initcouch.sh
+RUN chmod +x conf/initcouch.sh conf/entrypoint.sh
 COPY config-example.js config.js
-RUN at -f ./conf/initcouch.sh now + 5 min
-RUN echo "./utils/elasticsearch.sh hradmin test" | at now + 5 min
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+ENTRYPOINT ['/usr/src/app/conf/entrypoint.sh']

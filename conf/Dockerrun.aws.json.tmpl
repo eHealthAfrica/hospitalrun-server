@@ -75,14 +75,14 @@
        "mountPoints": [
        {
          "sourceVolume": "couchdb-data",
-         "containerPath": "/opt/couchdb/data",
+         "containerPath": "/usr/local/var/lib/couchdb",
          "readOnly": false
        }
        ]
      },
     {
        "name": "logstash",
-       "image": "docker.elastic.co/logstash/logstash:5.2.2",
+       "image": "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_logstash:${TAG}",
        "essential": true,
        "memory": 500,
        "logConfiguration": {
@@ -106,10 +106,14 @@
          "readOnly": false
        }
        ]
+        "links": [
+         "couchdb",
+         "elasticsearch"
+      ]
     },
      {
        "name": "elasticsearch",
-       "image": "387526361725.dkr.ecr.eu-west-1.amazonaws.com/hospitalrun_elasticsearch:latest",
+       "image": "docker.elastic.co/elasticsearch/elasticsearch:5.2.2",
        "essential": true,
        "memory": 500,
        "logConfiguration": {

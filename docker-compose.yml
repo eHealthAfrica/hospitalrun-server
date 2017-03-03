@@ -26,8 +26,7 @@ services:
 
   elasticsearch:
     container_name: elasticsearch_hr
-    build: ./elasticsearch/
-    image: elasticsearch_hr
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.2.2
     volumes:
       - ./data/elasticsearch:/usr/share/elasticsearch/data
     ports:
@@ -35,7 +34,11 @@ services:
 
   logstash:
     container_name: logstash_hr
-    image: docker.elastic.co/logstash/logstash:5.2.2
+    build: logstash/
+    image: hospitalrun_logstash
     volumes:
       - ./data/logstash/pipeline/:/usr/share/logstash/pipeline/
-      - ./data/logstash/settings/:/usr/share/logstash/config/
+      - ./data/logstash/config/:/usr/share/logstash/config/
+    links:
+      - couchdb
+      - elasticsearch
