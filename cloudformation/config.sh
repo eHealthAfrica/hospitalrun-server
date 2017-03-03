@@ -8,7 +8,7 @@ billing_project='HospitalRunCURE'
 hosted_zone_name="ehealthafrica.org"
 ssh_key_name="aws-deploy"
 cf_s3_bucket="eha-cloudformation"
-cf_s3_zip_file="hospitalrun.zip"
+cf_s3_zip_file="example-docker.zip"
 rename_lambda="arn:aws:lambda:eu-west-1:387526361725:function:rename_resources"
 sns_topic="arn:aws:sns:eu-west-1:387526361725:slack_notification"
 ssl_cert="arn:aws:acm:eu-west-1:387526361725:certificate/b093a099-e453-4290-90b4-8a97f43174ec"
@@ -20,7 +20,7 @@ image_id="ami-d0fa87a3"
 # to remove an environment remove value from each of the arrays (order matters)
 # and remove correspondive resource (order matters here as well) and output (Env*) in cloudformation.json
 environments=('dev')
-instance_types=('t2.small')
+instance_types=('t2.medium')
 spot_prices=('')
 
 # create arrays with credentials correspondive to the environment from environments array
