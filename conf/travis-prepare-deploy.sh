@@ -15,7 +15,7 @@ if [ -z "${TAG}" ]; then
     TAG="${COMMIT}"
 fi
 
-export TAG
+export TAG ="${TRAVIS_TAG}"
 
 # set beanstalk environments for dev and stage
 # Prod will be deployed on Digital Ocean as specified in .travis.yml file
@@ -37,8 +37,5 @@ docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"
 
 
 envsubst < conf/travis-deploy.sh.tmpl > travis-deploy.sh
-
-cat Dockerrun.aws.json
-ls
 
 chmod +x travis-deploy.sh
