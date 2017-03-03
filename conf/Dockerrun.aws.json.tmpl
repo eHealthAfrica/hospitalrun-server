@@ -11,7 +11,8 @@
        "name": "couchdb-data",
        "host": {
          "sourcePath": "/opt/couchdb/data"
-       },
+        }
+      },
      {
        "name": "logstash-data",
        "host": {
@@ -87,7 +88,7 @@
        "logConfiguration": {
          "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "${DEPLOY_ENV},
+          "awslogs-group": "${DEPLOY_ENV}",
           "awslogs-region": "eu-west-1",
           "awslogs-stream-prefix": "hospitalrun-logstash"
         }
