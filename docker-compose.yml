@@ -37,8 +37,8 @@ services:
     build: logstash/
     image: hospitalrun_logstash
     volumes:
-      - ./data/logstash/pipeline/:/usr/share/logstash/pipeline/
-      - ./data/logstash/config/:/usr/share/logstash/config/
+      - ./logstash/pipeline/:/usr/share/logstash/pipeline/
+      - ./logstash/config/:/usr/share/logstash/config/
     links:
       - couchdb
       - elasticsearch
