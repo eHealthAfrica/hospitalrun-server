@@ -2,4 +2,5 @@
 
 set -x -e
 
-eb deploy "${DEPLOY_ENV}" -l "${TAG}"
+
+eb deploy "${DEPLOY_ENV}" -l "${TAG}" --staged
