@@ -24,7 +24,7 @@
     "colors": "^1.1.2",
     "csv-parse": "1.1.7",
     "express": "^4.13.4",
-    "@ehealth-ci/hospitalrun": "0.9.20",
+    "@ehealth-ci/hospitalrun": "latest",
     "hospitalrun-dblisteners": "0.9.5",
     "hospitalrun-server-routes": "0.9.9",
     "moment": "^2.15.2",
