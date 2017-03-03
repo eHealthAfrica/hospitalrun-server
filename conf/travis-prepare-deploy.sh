@@ -8,6 +8,8 @@ COMMIT="${TRAVIS_COMMIT}"
 BRANCH="${TRAVIS_BRANCH}"
 PR="${TRAVIS_PULL_REQUEST}"
 
+envsubst < conf/Dockerrun.aws.json.tmpl > Dockerrun.aws.json
+
 if [ -z "${TAG}" ]; then
     echo "No tags, tagging as: ${COMMIT}"
     TAG="${COMMIT}"
@@ -34,8 +36,9 @@ docker tag "${PROJECT_NAME}:latest" "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}
 docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"
 
 
-envsubst < conf/travis-deploy.sh.tmpl > travis-deploy.sh && envsubst < conf/Dockerrun.aws.json.tmpl > Dockerrun.aws.json
+envsubst < conf/travis-deploy.sh.tmpl > travis-deploy.sh
 
+cat Dockerrun.aws.json
 ls
 
 chmod +x travis-deploy.sh
