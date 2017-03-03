@@ -25,7 +25,7 @@
       "name": "hospitalrun-server",
       "image": "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}",
       "essential": true,
-      "memory": 200,
+      "memory": 500,
       "hostname": "hospitalrun",
       "command": [ "npm", "start" ],
       "logConfiguration": {
@@ -115,7 +115,7 @@
        "name": "elasticsearch",
        "image": "docker.elastic.co/elasticsearch/elasticsearch:5.2.2",
        "essential": true,
-       "memory": 1000,
+       "memory": 700,
        "logConfiguration": {
          "logDriver": "awslogs",
          "options": {
@@ -127,7 +127,7 @@
       "environment": [
         {
           "name": "ES_JAVA_OPTS",
-          "value": "-Xms900m -Xmx900m"
+          "value": "-Xms700m -Xmx700m"
         }
        ],
        "mountPoints": [{
