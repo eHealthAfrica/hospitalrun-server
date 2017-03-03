@@ -1,6 +1,6 @@
 branch-defaults:
   deploy:
-    artifact: deploy.zip
+    environment: hospitalrun-dev
   docker:
     environment: hospitalrun-dev
   master:
