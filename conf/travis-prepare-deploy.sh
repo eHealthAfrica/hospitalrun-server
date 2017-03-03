@@ -15,7 +15,7 @@ if [ -z "${TAG}" ]; then
     TAG="${COMMIT}"
 fi
 
-export TAG="${TRAVIS_TAG}"
+export TAG=$TAG
 
 # set beanstalk environments for dev and stage
 # Prod will be deployed on Digital Ocean as specified in .travis.yml file
