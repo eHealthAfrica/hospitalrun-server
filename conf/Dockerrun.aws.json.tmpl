@@ -11,13 +11,18 @@
        "name": "couchdb-data",
        "host": {
          "sourcePath": "/opt/couchdb/data"
+       },
+     {
+       "name": "logstash-data",
+       "host": {
+         "sourcePath": "/opt/logstash/data"
        }
      }
   ],
   "containerDefinitions": [
     {
       "name": "hospitalrun-server",
-      "image": "387526361725.dkr.ecr.eu-west-1.amazonaws.com/hospitalrun:latest",
+      "image": "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}",
       "essential": true,
       "memory": 300,
       "hostname": "hospitalrun",
@@ -25,7 +30,7 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "hospitalrun-dev",
+          "awslogs-group": "${DEPLOY_ENV}",
           "awslogs-region": "eu-west-1",
           "awslogs-stream-prefix": "hospitalrun"
         }
@@ -74,6 +79,33 @@
        }
        ]
      },
+    {
+       "name": "logstash",
+       "image": "docker.elastic.co/logstash/logstash:5.2.2",
+       "essential": true,
+       "memory": 500,
+       "logConfiguration": {
+         "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "${DEPLOY_ENV},
+          "awslogs-region": "eu-west-1",
+          "awslogs-stream-prefix": "hospitalrun-logstash"
+        }
+       },
+       "portMappings": [
+         {
+           "hostPort": 5045,
+           "containerPort": 5044
+         }
+       ],
+       "mountPoints": [
+       {
+         "sourceVolume": "logstash-data",
+         "containerPath": "/usr/share/logstash/pipeline/",
+         "readOnly": false
+       }
+       ]
+    },
      {
        "name": "elasticsearch",
        "image": "387526361725.dkr.ecr.eu-west-1.amazonaws.com/hospitalrun_elasticsearch:latest",

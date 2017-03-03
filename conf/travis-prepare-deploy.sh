@@ -36,4 +36,5 @@ docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"
 ls
 
 envsubst < conf/travis-deploy.sh.tmpl > travis-deploy.sh
+envsubst < conf/Dockerrun.aws.json.tmpl > Dockerrun.aws.json
 chmod +x travis-deploy.sh
