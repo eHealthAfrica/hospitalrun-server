@@ -15,3 +15,5 @@ global:
   default_region: eu-west-1
   profile: null
   sc: git
+deploy:
+  artifact: deploy.zip
