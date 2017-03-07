@@ -25,6 +25,8 @@ restart.sh
 
 start.sh
 
+!conf/polyclinic/start.sh
+
 stop.sh
 
 newrelic_agent.log
