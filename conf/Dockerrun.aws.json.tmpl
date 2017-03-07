@@ -134,6 +134,18 @@
           "awslogs-stream-prefix": "hospitalrun-es"
         }
        },
+      "ulimits": [
+      {
+        "name": "memlock",
+        "softLimit": -1,
+        "hardLimit": -1
+      },
+      {
+        "name": "nofile",
+        "softLimit": 65536,
+        "hardLimit": 65536
+      }
+    ]
       "environment": [
         {
           "name": "ES_JAVA_OPTS",
