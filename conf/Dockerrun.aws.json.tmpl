@@ -31,9 +31,9 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "hospitalrun-dev",
+          "awslogs-group": "hospitalrun-cure-dev",
           "awslogs-region": "eu-west-1",
-          "awslogs-stream-prefix": "hospitalrun"
+          "awslogs-stream-prefix": "hospitalrun-cure"
         }
       },
       "portMappings": [
@@ -61,11 +61,21 @@
        "logConfiguration": {
          "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "hospitalrun-dev",
+          "awslogs-group": "hospitalrun-cure-dev",
           "awslogs-region": "eu-west-1",
           "awslogs-stream-prefix": "hospitalrun-app"
         }
        },
+        "environment": [
+        {
+          "name": "COUCHDB_USER",
+          "value": "${COUCHDB_USER}"
+        },
+        {
+          "name": "COUCHDB_PASSWORD",
+          "value": "${COUCHDB_PASSWORD}"
+        }
+       ],
        "portMappings": [
          {
            "hostPort": 5985,
@@ -88,7 +98,7 @@
        "logConfiguration": {
          "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "hospitalrun-dev",
+          "awslogs-group": "hospitalrun-cure-dev",
           "awslogs-region": "eu-west-1",
           "awslogs-stream-prefix": "hospitalrun-logstash"
         }
@@ -119,7 +129,7 @@
        "logConfiguration": {
          "logDriver": "awslogs",
          "options": {
-          "awslogs-group": "hospitalrun-dev",
+          "awslogs-group": "hospitalrun-cure-dev",
           "awslogs-region": "eu-west-1",
           "awslogs-stream-prefix": "hospitalrun-es"
         }
