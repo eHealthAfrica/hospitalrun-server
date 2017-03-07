@@ -27,17 +27,21 @@ if [[ "${PR}" == "false" ]]; then
 fi
 
 if [[ "${BRANCH}" == "dev" || "${BRANCH}" == "stage" || "${BRANCH}" == "master" ]]; then
-$(aws ecr get-login --region="${AWS_REGION}")
-docker-compose build
-docker tag "${PROJECT_NAME}:latest" "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"
-docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"
+    $(aws ecr get-login --region="${AWS_REGION}")
+    docker-compose build
+    docker tag "${PROJECT_NAME}:latest" "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"
+    docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"
 
-# Push Logstash
-docker tag "${PROJECT_NAME}_logstash:latest" "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_logstash:${TAG}"
-docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_logstash:${TAG}"
+    # Push Logstash
+    docker tag "${PROJECT_NAME}_logstash:latest" "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_logstash:${TAG}"
+    docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_logstash:${TAG}"
 
-envsubst < conf/travis-deploy.sh.tmpl > travis-deploy.sh && envsubst < conf/Dockerrun.aws.json.tmpl > Dockerrun.aws.json
+    # Substitute Environment Variables
+    envsubst < conf/travis-deploy.sh.tmpl > travis-deploy.sh && envsubst < conf/Dockerrun.aws.json.tmpl > Dockerrun.aws.json
 
-chmod +x travis-deploy.sh
-else echo "Branch is not a baseline branch. No build will be made or pushed to the repository"
+    chmod +x travis-deploy.sh
+        elif [[ "${BRANCH}" == "eHA/Polyclinic" ]]; then
+            envsubst < conf/polyclinic/polyclinic-deploy.sh.tmpl > conf/polyclinic/polyclinic-deploy.sh
+            chmod +x conf/polyclinic/polyclinic-deploy.sh
+    else echo "Branch is not a baseline branch. No build will be made or pushed to the repository"
 fi
