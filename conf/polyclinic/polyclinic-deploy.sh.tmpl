@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+rsync -av –delete -e ssh -i conf/polyclinic/polyclinic . polyclinic@"${POLYCLINIC_IP}":~/polyclinic
+ssh -i conf/polyclinic/polyclinic polyclinic@"${POLYCLINIC_IP}" "./conf/polyclinic/start.sh"

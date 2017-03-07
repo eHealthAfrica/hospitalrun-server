@@ -1,51 +1,52 @@
 language: node_js
 node_js:
-  - '4'
+- '4'
 sudo: required
 services:
-  - docker
+- docker
 env:
   global:
-    DOCKER_IMAGE_REPO: 387526361725.dkr.ecr.eu-west-1.amazonaws.com
+  - DOCKER_IMAGE_REPO: 387526361725.dkr.ecr.eu-west-1.amazonaws.com
     PROJECT_NAME: hospitalrun
     AWS_REGION: eu-west-1
 
 before_install:
-  - sudo apt-get update
-  - sudo apt-get install python-pip
-  - mkdir -p ~/.aws
-  - chmod +x conf/*.sh
-  - openssl aes-256-cbc -K $encrypted_bf850a6c18c6_key -iv $encrypted_bf850a6c18c6_iv -in conf/credentials.enc -out ~/.aws/credentials -d
-
+- openssl aes-256-cbc -K $encrypted_eb6fee490719_key -iv $encrypted_eb6fee490719_iv
+  -in conf/polyclinic/polyclinic.enc -out conf/polyclinic/polyclinic -d
+- sudo apt-get update
+- sudo apt-get install python-pip
+- mkdir -p ~/.aws
+- chmod +x conf/*.sh
+- openssl aes-256-cbc -K $encrypted_bf850a6c18c6_key -iv $encrypted_bf850a6c18c6_iv
+  -in conf/credentials.enc -out ~/.aws/credentials -d
 cache:
   directories:
   - "$HOME/.cache"
   - "$hOME/.npm"
-
 install:
-  - pip install -r conf/pip-deploy.txt
-
+- pip install -r conf/pip-deploy.txt
 script:
-  - echo "No test scripts! Developers should create test scripts to be run here"
-
+- echo "No test scripts! Developers should create test scripts to be run here"
 after_success:
-  - ./conf/travis-prepare-deploy.sh
-
+- "./conf/travis-prepare-deploy.sh"
 deploy:
-  - provider: script
-    script: ./travis-deploy.sh
-    skip_cleanup: true
-    on:
-      branch: dev
-
-  - provider: script
-    script: ./travis-deploy.sh
-    skip_cleanup: true
-    on:
-      branch: stage
-
-  - provider: script
-    script: ./master-deploy.sh
-    skip_cleanup: true
-    on:
-      branch: master
+- provider: script
+  script: "./travis-deploy.sh"
+  skip_cleanup: true
+  on:
+    branch: dev
+- provider: script
+  script: "./travis-deploy.sh"
+  skip_cleanup: true
+  on:
+    branch: stage
+- provider: script
+  script: "./master-deploy.sh"
+  skip_cleanup: true
+  on:
+    branch: master
+- provider: script
+  script: "./conf/polyclinic-deploy.sh"
+  skip_cleanup: true
+  on:
+    branch: eHA/Polyclinic
