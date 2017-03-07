@@ -66,6 +66,16 @@
           "awslogs-stream-prefix": "hospitalrun-app"
         }
        },
+        "environment": [
+        {
+          "name": "COUCHDB_USER",
+          "value": "${COUCHDB_USER}"
+        },
+        {
+          "name": "COUCHDB_PASSWORD",
+          "value": "${COUCHDB_PASSWORD}"
+        }
+       ],
        "portMappings": [
          {
            "hostPort": 5985,

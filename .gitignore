@@ -23,6 +23,8 @@ certificate.pem
 
 restart.sh
 
+cloudformation
+
 start.sh
 
 !conf/polyclinic/start.sh
