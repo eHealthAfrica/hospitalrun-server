@@ -1,8 +1,8 @@
 branch-defaults:
   deploy:
-    environment: hospitalrun-dev
+    environment: hospitalrun-cure-dev
   docker:
-    environment: hospitalrun-dev
+    environment: hospitalrun-cure-dev
   master:
     environment: null
     group_suffix: null
@@ -13,7 +13,7 @@ environment-defaults:
     branch: null
     repository: null
 global:
-  application_name: hospitalrun
+  application_name: hospitalrun-cure
   default_ec2_keyname: aws-deploy
   default_platform: Multi-container Docker 1.12.6 (Generic)
   default_region: eu-west-1
