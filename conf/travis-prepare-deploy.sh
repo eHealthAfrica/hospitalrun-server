@@ -42,6 +42,6 @@ if [[ "${BRANCH}" == "dev" || "${BRANCH}" == "stage" || "${BRANCH}" == "master" 
     chmod +x travis-deploy.sh
         elif [[ "${BRANCH}" == "eHA/Polyclinic" ]]; then
             envsubst < conf/polyclinic/polyclinic-deploy.sh.tmpl > conf/polyclinic/polyclinic-deploy.sh
-            chmod +x conf/polyclinic/polyclinc-deploy.sh
+            chmod +x conf/polyclinic/polyclinic-deploy.sh
     else echo "Branch is not a baseline branch. No build will be made or pushed to the repository"
 fi
