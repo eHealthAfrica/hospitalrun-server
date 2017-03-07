@@ -9,7 +9,7 @@ branch-defaults:
 deploy:
   artifact: deploy.zip
 environment-defaults:
-  hospitalrun-dev:
+  hospitalrun-cure-dev:
     branch: null
     repository: null
 global:
