@@ -26,7 +26,7 @@ if [[ "${PR}" == "false" ]]; then
     fi
 fi
 
-if [[ "${BRANCH}" == "dev" || "${BRANCH}" == "stage" || "${BRANCH}" == "master" ]]; then
+if [[ "${BRANCH}" == "develop" || "${BRANCH}" == "stage" || "${BRANCH}" == "master" ]]; then
     $(aws ecr get-login --region="${AWS_REGION}")
     docker-compose build
     docker tag "${PROJECT_NAME}:latest" "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"

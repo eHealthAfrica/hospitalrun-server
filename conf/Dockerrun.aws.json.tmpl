@@ -25,7 +25,7 @@
       "name": "hospitalrun-server",
       "image": "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}",
       "essential": true,
-      "memory": 300,
+      "memory": 400,
       "hostname": "hospitalrun",
       "command": [ "npm", "start" ],
       "logConfiguration": {
@@ -57,7 +57,7 @@
        "name": "couchdb",
        "image": "couchdb:1.6",
        "essential": true,
-       "memory": 200,
+       "memory": 500,
        "logConfiguration": {
          "logDriver": "awslogs",
         "options": {
@@ -94,7 +94,7 @@
        "name": "logstash",
        "image": "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_logstash:${TAG}",
        "essential": true,
-       "memory": 200,
+       "memory": 700,
        "logConfiguration": {
          "logDriver": "awslogs",
         "options": {
@@ -125,7 +125,7 @@
        "name": "elasticsearch",
        "image": "docker.elastic.co/elasticsearch/elasticsearch:5.2.2",
        "essential": true,
-       "memoryReservation": "600",
+       "memoryReservation": "800",
        "logConfiguration": {
          "logDriver": "awslogs",
          "options": {
@@ -149,7 +149,7 @@
       "environment": [
         {
           "name": "ES_JAVA_OPTS",
-          "value": "-Xms400m -Xmx400m"
+          "value": "-Xms512m -Xmx512m"
         },
         {
           "name": "http.host",
