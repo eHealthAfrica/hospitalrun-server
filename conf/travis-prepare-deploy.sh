@@ -19,7 +19,7 @@ export TAG=$TAG
 # set beanstalk environments for dev and stage
 # Prod will be deployed on Digital Ocean as specified in .travis.yml file
 if [[ "${PR}" == "false" ]]; then
-    if [[ "${BRANCH}" == "dev" ]]; then
+    if [[ "${BRANCH}" == "develop" ]]; then
         export DEPLOY_ENV="hospitalrun-dev"
     elif [[ "${BRANCH}" == "stage" ]]; then
         export DEPLOY_ENV="hospitalrun-stage"
