@@ -36,6 +36,10 @@ if [[ "${BRANCH}" == "develop" || "${BRANCH}" == "stage" || "${BRANCH}" == "mast
     docker tag "${PROJECT_NAME}_logstash:latest" "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_logstash:${TAG}"
     docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_logstash:${TAG}"
 
+    # Push Nginx
+    docker tag "${PROJECT_NAME}_nginx:latest" "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_nginx:${TAG}"
+    docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_nginx:${TAG}"
+
     # Substitute Environment Variables
     envsubst < conf/travis-deploy.sh.tmpl > travis-deploy.sh && envsubst < conf/Dockerrun.aws.json.tmpl > Dockerrun.aws.json
 
