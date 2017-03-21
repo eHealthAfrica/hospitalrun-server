@@ -22,7 +22,37 @@
   ],
   "containerDefinitions": [
     {
-      "name": "hospitalrun-server",
+      "name": "hospitalrun-nginx",
+      "image": "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_nginx:${TAG}",
+      "essential": true,
+      "memory": 300,
+      "hostname": "hospitalrun-nginx",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "hospitalrun-dev",
+          "awslogs-region": "eu-west-1",
+          "awslogs-stream-prefix": "hospitalrun-nginx"
+        }
+      },
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "environment": [
+        {
+          "name": "DEBUG",
+          "value": "False"
+        }
+      ],
+      "links": [
+         "hospitalrun"
+      ]
+     },
+     {
+      "name": "hospitalrun",
       "image": "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}",
       "essential": true,
       "memory": 400,
@@ -36,12 +66,6 @@
           "awslogs-stream-prefix": "hospitalrun-cure"
         }
       },
-      "portMappings": [
-        {
-          "hostPort": 80,
-          "containerPort": 3000
-        }
-      ],
       "environment": [
         {
           "name": "DEBUG",

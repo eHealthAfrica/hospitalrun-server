@@ -1,11 +1,16 @@
 version: "2.0"
 services:
+  nginx:
+    build: nginx/.
+    links:
+      - hospitalrun
+    ports:
+      - "8055:80"
+    image: hospitalrun_nginx
   hospitalrun:
     container_name: hospitalrun
     build: .
     image: hospitalrun
-    ports:
-      - "8090:3000"
     links:
       - couchdb
       - elasticsearch
