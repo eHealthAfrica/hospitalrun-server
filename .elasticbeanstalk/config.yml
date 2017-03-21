@@ -6,6 +6,8 @@ branch-defaults:
   master:
     environment: null
     group_suffix: null
+  nginx:
+    environment: hospitalrun-dev
 deploy:
   artifact: deploy.zip
 environment-defaults:
