@@ -30,7 +30,7 @@ services:
     container_name: couchdb_hr
     image: couchdb:1.6
     volumes:
-      - ./data/couchdb:/opt/couchdb/data
+      - ./data/couchdb:/usr/local/var/lib/couchdb
     ports:
       - "5985:5984"
 
