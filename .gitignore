@@ -25,6 +25,8 @@ restart.sh
 
 cloudformation
 
+Dockerrun.aws.json
+
 start.sh
 
 !conf/polyclinic/start.sh

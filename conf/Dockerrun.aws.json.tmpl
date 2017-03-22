@@ -22,26 +22,50 @@
   ],
   "containerDefinitions": [
     {
-      "name": "hospitalrun-server",
-      "image": "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}",
+      "name": "hospitalrun-nginx",
+      "image": "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_nginx:${TAG}",
       "essential": true,
       "memory": 300,
-      "hostname": "hospitalrun",
-      "command": [ "npm", "start" ],
+      "hostname": "hospitalrun-nginx",
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "hospitalrun-cure-dev",
+          "awslogs-group": "hospitalrun-dev",
           "awslogs-region": "eu-west-1",
-          "awslogs-stream-prefix": "hospitalrun-cure"
+          "awslogs-stream-prefix": "hospitalrun-nginx"
         }
       },
       "portMappings": [
         {
           "hostPort": 80,
-          "containerPort": 3000
+          "containerPort": 80
         }
       ],
+      "environment": [
+        {
+          "name": "DEBUG",
+          "value": "False"
+        }
+      ],
+      "links": [
+         "hospitalrun"
+      ]
+     },
+     {
+      "name": "hospitalrun",
+      "image": "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}",
+      "essential": true,
+      "memory": 400,
+      "hostname": "hospitalrun",
+      "command": [ "npm", "start" ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "hospitalrun-dev",
+          "awslogs-region": "eu-west-1",
+          "awslogs-stream-prefix": "hospitalrun-cure"
+        }
+      },
       "environment": [
         {
           "name": "DEBUG",
@@ -57,11 +81,11 @@
        "name": "couchdb",
        "image": "couchdb:1.6",
        "essential": true,
-       "memory": 200,
+       "memory": 500,
        "logConfiguration": {
          "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "hospitalrun-cure-dev",
+          "awslogs-group": "hospitalrun-dev",
           "awslogs-region": "eu-west-1",
           "awslogs-stream-prefix": "hospitalrun-app"
         }
@@ -94,11 +118,11 @@
        "name": "logstash",
        "image": "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_logstash:${TAG}",
        "essential": true,
-       "memory": 200,
+       "memory": 700,
        "logConfiguration": {
          "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "hospitalrun-cure-dev",
+          "awslogs-group": "hospitalrun-dev",
           "awslogs-region": "eu-west-1",
           "awslogs-stream-prefix": "hospitalrun-logstash"
         }
@@ -125,19 +149,31 @@
        "name": "elasticsearch",
        "image": "docker.elastic.co/elasticsearch/elasticsearch:5.2.2",
        "essential": true,
-       "memoryReservation": "600",
+       "memoryReservation": "800",
        "logConfiguration": {
          "logDriver": "awslogs",
          "options": {
-          "awslogs-group": "hospitalrun-cure-dev",
+          "awslogs-group": "hospitalrun-dev",
           "awslogs-region": "eu-west-1",
           "awslogs-stream-prefix": "hospitalrun-es"
         }
        },
+      "ulimits": [
+      {
+        "name": "memlock",
+        "softLimit": -1,
+        "hardLimit": -1
+      },
+      {
+        "name": "nofile",
+        "softLimit": 65536,
+        "hardLimit": 65536
+      }
+    ],
       "environment": [
         {
           "name": "ES_JAVA_OPTS",
-          "value": "-Xms400m -Xmx400m"
+          "value": "-Xms512m -Xmx512m"
         },
         {
           "name": "http.host",
