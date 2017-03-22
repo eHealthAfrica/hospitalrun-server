@@ -13,7 +13,7 @@ services:
       - "443:443"
     image: hospitalrun_nginx
     volumes:
-      - ./data/nginx/certs:/usr/share/elasticsearch/data
+      - ./data/nginx/certs/:/etc/letsencrypt/live/
 
   hospitalrun:
     container_name: hospitalrun
