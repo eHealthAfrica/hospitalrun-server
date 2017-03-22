@@ -11,6 +11,12 @@ Having a Node.js backend server allows us to do the following:
  * **lookup-import** - Utility to import lookup lists from the frontend.
  * **merge-conflicts** - Checks for couchdb conflicts and resolves using a strategy of accepting the last change at a field level.
 
+##Installation with Docker
+This is the preferred and adviseable way of running `hospitalrun-server`
+1. Clone files into your server
+2. Edit the `docker-compose.yml` file and replace `www.example.com` in `DOMAIN_NAME: www.example.com` with your domain name
+3. Run `docker-compose up -d` and wait a couple of minutes depending on your internet speed. Visit your domain name to see `hospitalrun in action`
+
 ##Installation
 1. Make sure you have installed [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 2. Make sure you have installed [Node.js 4.x](https://nodejs.org/en/download/) https://nodejs.org/en/download/

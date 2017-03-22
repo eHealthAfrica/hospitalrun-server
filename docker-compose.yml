@@ -1,11 +1,16 @@
 version: "2.0"
 services:
   nginx:
-    build: nginx/.
+    build:
+      args:
+        DOMAIN_NAME: www.example.com
+      context: nginx/.
+      dockerfile: Dockerfile
     links:
       - hospitalrun
     ports:
       - "8055:80"
+      - "443:443"
     image: hospitalrun_nginx
   hospitalrun:
     container_name: hospitalrun
