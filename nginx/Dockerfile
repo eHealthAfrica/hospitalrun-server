@@ -6,8 +6,7 @@ ARG DOMAIN_NAME
 RUN apt-get -y update && apt-get install -y cron
 
 COPY conf/certbot-auto /usr/bin/
-RUN  chmod a+x /usr/bin/certbot-auto \
-       && certbot-auto --os-packages-only --non-interactive
+RUN  certbot-auto --os-packages-only --non-interactive
 
 ENV DOMAIN_NAME $DOMAIN_NAME
 
