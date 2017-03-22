@@ -10,8 +10,6 @@ RUN  chmod a+x /usr/bin/certbot-auto \
        && certbot-auto --os-packages-only --non-interactive
 
 ENV DOMAIN_NAME $DOMAIN_NAME
-RUN mkdir -p /etc/letsencrypt/live/$DOMAIN_NAME
-COPY conf/certs/* /etc/letsencrypt/live/$DOMAIN_NAME/
 
 WORKDIR /etc/nginx
 COPY conf/nginx.conf /etc/nginx/nginx.conf
