@@ -28,6 +28,8 @@ services:
       - elasticsearch
       - logstash
     container_name: hospitalrun
+    volumes:
+      - ./patientimages:/usr/src/app/patientimages
 
   couchdb:
     container_name: couchdb_hr
