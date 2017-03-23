@@ -5,7 +5,7 @@ if [ -z "${1}" ] || [ -z "${2}" ]; then
 fi
 
 echo "Setting up mappings"
-curl -XPUT 'elasticsearch:9200/hrdb' -d' {
+curl --user elastic:changeme -XPUT 'elasticsearch:9200/hrdb' -d' {
     "mappings": {
         "_default_": {        
             "date_detection": false,
@@ -47,8 +47,8 @@ curl -XPUT 'elasticsearch:9200/hrdb' -d' {
         }        
     }
  }'
-echo "Setting up couchdb river" 
-curl -XPUT 'elasticsearch:9200/_river/hrdb/_meta' -d "{
+echo "Setting up couchdb_changes for logstash"
+curl --user elastic:changeme -XPUT 'elasticsearch:9200/river/hrdb/_meta' -d "{
     \"type\" : \"couchdb\",
     \"couchdb\" : {
         \"host\" : \"localhost\",
