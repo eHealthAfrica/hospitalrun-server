@@ -1,4 +1,3 @@
-FROM docker.elastic.co/logstash/logstash:5.2.2
-RUN rm -f /usr/share/logstash/pipeline/logstash.conf
-COPY pipeline/* /usr/share/logstash/pipeline/
-COPY config/* /usr/share/logstash/config/
+FROM logstash:2
+COPY pipeline/logstash.conf /logstash/config/
+CMD ["-f", "/logstash/config/logstash.conf", "--allow-env"]
