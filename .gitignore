@@ -9,6 +9,7 @@ rebuild.sh
 
 data/elasticsearch/*
 data/couchdb/*
+data/nginx/*
 
 
 hospitalrun.crt
