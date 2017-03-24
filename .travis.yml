@@ -4,53 +4,26 @@ node_js:
 sudo: required
 services:
 - docker
-addons:
-  ssh_known_hosts:
-    - secure: "vj0+4OIIzTa1xZfJj8hDHSfLmT8KvebSpi+J4ZHIqbiWVog3dBdQINng0vz4eib3hPjTTvlX67TB3Ekg88UC3pq5QJGCppI5lvmMUSIXL7lUsvEr8VgB5RY8OZje5m1Xj26Ly09932clSYqpWNSBuQU0x4AI3Lv+XKl8oVNYWq8VAvplMuBixi2z7EJd2GVi9/Qhq4/fvkVdw9xXY0UFUEAQ3iRyTl6RIVF4dnIEMAE5seEYFW4o1AVedWsS3kOHBeRK992aEDTiyrM/r4rznqlDe+jtMJxSAklRhOhPzTz982tgg60CpJCGacdGxOfVcSLVwz9JkMgT9XUvr46HlweWYXWN6lXN09XaVv7bZLGUx+ssk3uegrsy8eXNIgHz/7AXZBhdUqe43gcMO6yy+r7/MJVvWbOI8vWgsVOiHa1Ooi3cq224hJYk96HQqRfTSDUryr8yMX9KhyhqXSJseMjxdNzPvKqvqK9GpEzIyC6gvnpLi0Vptfk8qHX9zVlXS9Ye69kXf6lyo1VfdkAgnj8gdODP25crXc+4CTJ8EsvbVrToaKYO/DtVFsLR4DSzcWV4F9iFfgn4vkB565OARb5OFirVCwVSTCT+b7K9QCURlm+4zUFX09zv09n/HM8cvn9uQujlFgm5h8qxze8muVFZS755D8LOogovlP1pEwc="
-    - secure: "XaAPRrshh7lUN5tIiU1atrozjuD9kEBJeKnvUO8qa+BUlaXLvYcrkg7rmXLPqAaerK83aMyCfS7jSA+hJoo4/vdsW59s6R/AzpHC+3CtLO2L4xEV5Eyf0jACXPChmyDDfUAeR7YKpYp9U/3rnBc9nHf104IxZqRr5CwH9G/8KgBREs/AODOqRh9f7sy1QWcqMM3FemdBeCf+IMJoGoBCoQYs09sKbrd1LCT/kGo+qntTWJfuDw3JiRQ20ZG0OzhVFIH8/z39JtY9uOn6PdXVi6DiM+XXgxHuKPbMpytRyzJ7vIJkQlaodKIfM4ScUCkjMMxeKcKpquzbyPxENFZp8JXXYYN/X4dtithjTEV6FkBZ5aYGsHJYVs8lJdi0SqMEdH8SxBA3n82SKRMEF00ytdrkoQzznXC53SLx1P8hUvbsRsMoZlwFpwwpNDfbNwIOqw8a4glJugN5IVPNI8zLpBqZGrKPFTjtFC0eJI6xkyv8pvcKCs7sldTbFEEWdMzc6hVUURv1sccQPIv8ZDQOGAQqGM469ZviCK8fe4uFGTDzJ4Mkt0SL2O/9jugMb+QDbl2ir1UqYbhPa+tw/9VZxUirDR1g+CK93d7yGtKhmKnaBOAC8hGYhvc9JBASZQiu8maTx6TFJFwfK3be5TRZe12z5usUcGbXFfNQxDomwa4="
+
 env:
   global:
-  - DOCKER_IMAGE_REPO: 387526361725.dkr.ecr.eu-west-1.amazonaws.com
+  - DOCKER_IMAGE_REPO: CURE
     PROJECT_NAME: hospitalrun
-    AWS_REGION: eu-west-1
 
 before_install:
-- openssl aes-256-cbc -K $encrypted_eb6fee490719_key -iv $encrypted_eb6fee490719_iv
-  -in conf/polyclinic/polyclinic.enc -out conf/polyclinic/polyclinic -d
-- sudo apt-get update
-- sudo apt-get install python-pip
-- mkdir -p ~/.aws
 - chmod +x conf/*.sh
-- openssl aes-256-cbc -K $encrypted_bf850a6c18c6_key -iv $encrypted_bf850a6c18c6_iv
-  -in conf/credentials.enc -out ~/.aws/credentials -d
+
 cache:
   directories:
   - "$HOME/.cache"
   - "$hOME/.npm"
-install:
-- pip install -r conf/pip-deploy.txt
+
 script:
 - echo "No test scripts! Developers should create test scripts to be run here"
-after_success:
-- "./conf/travis-prepare-deploy.sh"
+
 deploy:
 - provider: script
-  script: "./travis-deploy.sh"
-  skip_cleanup: true
-  on:
-    branch: develop
-- provider: script
-  script: "./travis-deploy.sh"
-  skip_cleanup: true
-  on:
-    branch: stage
-- provider: script
-  script: "./conf/master-deploy.sh"
+  script: "./conf/travis-deploy.sh"
   skip_cleanup: true
   on:
     branch: master
-- provider: script
-  script: "./conf/polyclinic/polyclinic-deploy.sh"
-  skip_cleanup: true
-  on:
-    branch: eHA/Polyclinic

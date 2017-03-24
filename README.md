@@ -3,6 +3,8 @@ HospitalRun Server
 This is the Node.js backend for HospitalRun.  The intention is that this would be used in HospitalRun production deployments.
 Having a Node.js backend server allows us to do the following:
 
+Full deployment documentation is available at [HospitalRun Deployment](https://confluence.ehealthafrica.org/display/HD/)
+
 1. Use Google OAuth for user authentication.
 2. Provide a proxy for CouchDB.
 3. Integrate with ElasticSearch for better search capability.
@@ -12,7 +14,7 @@ Having a Node.js backend server allows us to do the following:
  * **merge-conflicts** - Checks for couchdb conflicts and resolves using a strategy of accepting the last change at a field level.
 
 ##Installation with Docker
-This is the preferred and adviseable way of running `hospitalrun-server`
+This is the preferred and advisable way of running `hospitalrun-server`
 1. Clone files into your server
 2. Edit the `docker-compose.yml` file and replace `www.example.com` in `DOMAIN_NAME: www.example.com` with your domain name
 3. Run `docker-compose up -d` and wait a couple of minutes depending on your internet speed. Visit your domain name to see `hospitalrun in action`

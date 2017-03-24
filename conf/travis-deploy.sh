@@ -16,18 +16,9 @@ fi
 
 export TAG=$TAG
 
-# set beanstalk environments for dev and stage
-# Prod will be deployed on Digital Ocean as specified in .travis.yml file
-if [[ "${PR}" == "false" ]]; then
-    if [[ "${BRANCH}" == "develop" ]]; then
-        export DEPLOY_ENV="hospitalrun-dev"
-    elif [[ "${BRANCH}" == "stage" ]]; then
-        export DEPLOY_ENV="hospitalrun-stage"
-    fi
-fi
+if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
 
-if [[ "${BRANCH}" == "develop" || "${BRANCH}" == "stage" || "${BRANCH}" == "master" ]]; then
-    $(aws ecr get-login --region="${AWS_REGION}")
     docker-compose build
     docker tag "${PROJECT_NAME}:latest" "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"
     docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}:${TAG}"
@@ -40,12 +31,6 @@ if [[ "${BRANCH}" == "develop" || "${BRANCH}" == "stage" || "${BRANCH}" == "mast
     docker tag "${PROJECT_NAME}_nginx:latest" "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_nginx:${TAG}"
     docker push "${DOCKER_IMAGE_REPO}/${PROJECT_NAME}_nginx:${TAG}"
 
-    # Substitute Environment Variables
-    envsubst < conf/travis-deploy.sh.tmpl > travis-deploy.sh && envsubst < conf/Dockerrun.aws.json.tmpl > Dockerrun.aws.json
 
-    chmod +x travis-deploy.sh
-        elif [[ "${BRANCH}" == "eHA/Polyclinic" ]]; then
-            envsubst < conf/polyclinic/polyclinic-deploy.sh.tmpl > conf/polyclinic/polyclinic-deploy.sh
-            chmod +x conf/polyclinic/polyclinic-deploy.sh
     else echo "Branch is not a baseline branch. No build will be made or pushed to the repository"
 fi
