@@ -13,7 +13,7 @@ services:
       - "443:443"
     image: hospitalrun_nginx
     volumes:
-      - ./data/nginx/certs/:/etc/letsencrypt/live/
+      - ./data/nginx/letsencrypt:/etc/letsencrypt
 
   hospitalrun:
     container_name: hospitalrun
