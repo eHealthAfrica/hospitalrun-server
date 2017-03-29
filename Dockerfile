@@ -3,7 +3,7 @@ LABEL maintainer Mofesola Babalola <mofesola.babalola@ehealthnigeria.org>
 
 #Get required applications
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && apt-get install -y  curl wget at
+RUN apt-get update && apt-get install -y  curl
 
 #Create App Directory
 RUN mkdir -p /usr/src/app

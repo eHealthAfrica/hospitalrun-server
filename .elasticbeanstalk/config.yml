@@ -3,6 +3,8 @@ branch-defaults:
     environment: hospitalrun-dev
   docker:
     environment: hospitalrun-dev
+  elk:
+    environment: hospitalrun-dev
   master:
     environment: null
     group_suffix: null
