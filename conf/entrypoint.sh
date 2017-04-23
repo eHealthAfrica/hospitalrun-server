@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-service atd start
-at -f /usr/src/app/conf/initcouch.sh now + 1 min
+# It will generally take about 40 seconds for elasticsearch and couchdb to be ready to receive connections
+echo 'Scheduling setup scripts to run in 70 seconds...'
+sleep 70 && /usr/src/app/conf/initcouch.sh  2>&1 && /usr/src/app/utils/elasticsearch.sh couchadmin test 2>&1 &
 npm start

@@ -9,7 +9,7 @@ rebuild.sh
 
 data/elasticsearch/*
 data/couchdb/*
-
+data/nginx
 
 hospitalrun.crt
 
@@ -24,6 +24,8 @@ certificate.pem
 restart.sh
 
 cloudformation
+
+Dockerrun.aws.json
 
 start.sh
 

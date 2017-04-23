@@ -39,7 +39,7 @@ if (config.serverPort) {
 
 config.couchDbURL = config.getProtocol(config.couchDbUseSsl) + config.couchDbServer + ':' + config.couchDbPort;
 config.couchAuthDbURL = config.getProtocol(config.couchDbUseSsl) + config.couchCredentials() + config.couchDbServer + ':' + config.couchDbPort;
-config.searchURL = 'http://elasticsearch:9200'; // ELASTIC SEARCH URL
+config.searchURL = 'http://elastic:changeme@elasticsearch:9200'; // ELASTIC SEARCH URL
 config.webDir = __dirname + '/public';
 config.serverInfo = 'Server Information to display to users when viewing about HospitalRun';
 module.exports = config;
