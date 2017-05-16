@@ -3,7 +3,7 @@ services:
   nginx:
     build:
       args:
-        DOMAIN_NAME: hospitalrun.ehealthafrica.org
+        DOMAIN_NAME: hospitalrun-polyclinic.ehealthafrica.org
       context: nginx/.
       dockerfile: Dockerfile
     links:
